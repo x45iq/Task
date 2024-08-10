@@ -1,0 +1,19 @@
+Сделал конечную точку REST, принимаю и отдаю Entity файла, для хранения data в БД выбрал bytea, для переконвертации на лету сделал Converter. Для удобства использовал Spring Data JPA и Lombok (вроде не запрещено).На это все сделаны 4 
+интеграционных теста. Потом все обернуто в docker. Максимальный размер отправленного файла примерно 14МБ далее всё упирается в длинну стринга в java. Посколько нельзя делать multipart это предел размера файла. Все поля title,description и т.д. обязательные
+
+запуск: sudo docker compose up
+
+примеры: 
+на localhost:6868/api/v1/files/   POST добавляет:
+application/json:
+{
+    "title":"title",
+    "description":"description",
+    "creationDate":"2010-10-10 10:10:10",
+    "data":"dGV4dCB0ZXh0"
+}
+
+на localhost:6868/api/v1/files/   GET получает все файлы отсортированые по дате:
+
+
+на localhost:6868/api/v1/files/1   GET получает файл с id=1: 
